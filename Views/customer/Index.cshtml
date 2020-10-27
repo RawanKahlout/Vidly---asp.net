@@ -1,0 +1,49 @@
+﻿@model  List<myvidly.Models.customer>
+@{
+    ViewBag.Title = "Customers";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2>Customers</h2>
+<br />
+<table id="customer" class="table table-striped">
+    <thead class="thead-dark">
+    <th>Customers</th>
+    <th>Membership Type</th>
+    <th>Delete</th>
+    </thead>
+    <tbody class="tbody">
+        @for (int i = 0; i < Model.Count; i++)
+        {
+            <tr>
+                <td>
+                    @Html.ActionLink(Model[i].customerName, "Edit", "customer", new { id = Model[i].id }, null)
+                </td>
+                <td>@Model[i].membershipType.name</td>
+                <td><button data-customer-id="@Model[i].id" class="btn-link js-delete">Delete</button></td>
+            </tr>
+        }
+    </tbody>
+</table>
+@section scripts{
+    <script>
+        $(document).ready(function () {
+            var table = $("#customer").DataTable();
+            $("#customer .js-delete").on("click", function () {
+                var button = $(this);
+                if (confirm("Are you sure you want delete this customer?")) {
+                    $.ajax({
+                        url: "api/customers/" + $(this).attr("data-customer-id"),
+                        method: "DELETE" ,
+                        success: function () {
+                            table.row(button.parents("tr").remove().draw()).remove();
+
+                    }
+
+                    })
+                }
+            })
+            
+        })
+    </script>
+}

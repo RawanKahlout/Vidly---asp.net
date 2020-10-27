@@ -1,0 +1,35 @@
+﻿@model  myvidly.ViewModel.customerMemberShip
+@{
+    ViewBag.Title = "newCustomer";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2>New Customer</h2>
+@using (@Html.BeginForm("save", "customer"))
+{
+    <div class="form-group">
+        @Html.LabelFor(m => m.customers.customerName)
+        @Html.TextBoxFor(m => m.customers.customerName, new { @class = "form-control" })
+        @Html.ValidationMessageFor(m => m.customers.customerName)
+    </div>
+    <div class="form-group">
+        @Html.LabelFor(m => m.customers.BirthData)
+        @Html.TextBoxFor(m => m.customers.BirthData, new { @class = "form-control" })
+        @Html.ValidationMessageFor(m => m.customers.BirthData)
+    </div>
+    <div class="form-group">
+        @Html.LabelFor(m => m.customers.membershipTypeId)
+        @Html.DropDownListFor(m => m.customers.membershipTypeId, new SelectList(Model.membershipTypes, "Id", "name"), "Select Membership Type", new { @class = "form-control" })
+    </div>
+    <div class="checkbox">
+        @Html.CheckBoxFor(m => m.customers.isSubscibedToNewsLetter) Subscribed to NewsLetter?
+    </div>
+    @Html.HiddenFor(m => m.customers.id);
+    @Html.AntiForgeryToken()
+    <input type="submit" class="btn btn-primary" />
+}
+<!--to enable client side validation , enable jquert bundel-->
+@section scripts
+{
+    @Scripts.Render("~/bundles/jqueryval")
+}

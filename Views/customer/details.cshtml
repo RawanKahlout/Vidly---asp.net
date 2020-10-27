@@ -1,0 +1,19 @@
+﻿@model myvidly.Models.customer
+@{
+    ViewBag.Title = "details";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2>Details</h2>
+<h3>@Model.customerName</h3>
+<ul>
+    <li>
+        Member ship Type : @Model.membershipType.name
+    </li>
+    @if (@Model.BirthData != null)
+    {
+        <li>
+            Birthdate : @Model.BirthData
+        </li>
+    }
+</ul>

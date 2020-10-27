@@ -1,0 +1,25 @@
+﻿@model List<myvidly.Models.movie>
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2>Movies</h2>
+
+@Html.ActionLink("New movie", "directToNewMovie", "movie", new { @class = "btn btn-primary" })
+<table class="table table-striped">
+    <thead class="thead-dark">
+    <th>Movies</th>
+    <th> Genre</th>
+    </thead>
+    <tbody class="tbody">
+            @for (int i = 0; i < Model.Count; i++)
+            {
+        <tr>
+            <td>@Html.ActionLink(@Model[i].MovieName, "Edit", new { id = Model[i].id })</td>
+            <td>@Model[i].genre.genresName</td>
+        </tr>
+            }
+     </tbody>
+</table>
+

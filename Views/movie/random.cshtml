@@ -1,0 +1,19 @@
+﻿@model myvidly.ViewModel.RandomMovieViewModel
+<!--we have only one  model property thats why we need view model -->
+@{
+    ViewBag.Title = "random";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2>@Model.movies.MovieName</h2>
+@if (Model.customers.Count == 0)
+{
+    <p>No one has rented this movied yet</p>
+}
+<p></p>
+<ul>
+    @foreach (var customer in Model.customers)
+    {
+        <li>@customer.customerName</li>
+    }
+</ul>
